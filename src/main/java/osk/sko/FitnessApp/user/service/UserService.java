@@ -13,8 +13,9 @@ import org.springframework.stereotype.Service;
 import osk.sko.FitnessApp.config.JwtService;
 import osk.sko.FitnessApp.exception.UnauthorizedAccessException;
 import osk.sko.FitnessApp.user.advice.UserAlreadyExistsException;
-import osk.sko.FitnessApp.user.dto.AuthRequestDTO;
-import osk.sko.FitnessApp.user.dto.AuthResponseDTO;
+import osk.sko.FitnessApp.user.dto.AuthRequest;
+import osk.sko.FitnessApp.user.dto.AuthResponse;
+import osk.sko.FitnessApp.user.dto.RegisterRequest;
 import osk.sko.FitnessApp.user.dto.UserDTO;
 import osk.sko.FitnessApp.user.mapper.UserMapper;
 import osk.sko.FitnessApp.user.model.User;
@@ -34,14 +35,14 @@ public class UserService {
     @Value("${server.servlet.session.cookie.same-site}")
     private String sameSite;
 
-    public void register(UserDTO userDTO) {
-        if(userRepository.findUserByEmail(userDTO.getEmail()).isEmpty()) {
+    public void register(RegisterRequest registerRequest) {
+        if(userRepository.findUserByEmail(registerRequest.getEmail()).isEmpty()) {
             User user = new User(
-                    userDTO.getEmail(),
-                    userDTO.getName(),
-                    userDTO.getLastName(),
-                    userDTO.getPhone(),
-                    passwordEncoder.encode(userDTO.getPassword()),
+                    registerRequest.getEmail(),
+                    registerRequest.getName(),
+                    registerRequest.getLastName(),
+                    registerRequest.getPhoneNumber(),
+                    passwordEncoder.encode(registerRequest.getPassword()),
                     "ROLE_USER"
             );
             userRepository.save(user);
@@ -50,7 +51,7 @@ public class UserService {
         }
     }
 
-    public AuthResponseDTO authenticate(AuthRequestDTO authRequestDTO, HttpServletResponse response) {
+    public AuthResponse authenticate(AuthRequest authRequestDTO, HttpServletResponse response) {
         Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
@@ -76,7 +77,7 @@ public class UserService {
 
             UserDTO userDTO = userMapper.userToUserDTO(user);
 
-            return new AuthResponseDTO(token, userDTO);
+            return new AuthResponse(token, userDTO);
 
         } else {
             throw new UnauthorizedAccessException("Invalid email or password");

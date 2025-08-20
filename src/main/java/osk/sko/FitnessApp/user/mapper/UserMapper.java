@@ -1,6 +1,7 @@
 package osk.sko.FitnessApp.user.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import osk.sko.FitnessApp.user.dto.UserDTO;
 import osk.sko.FitnessApp.user.model.User;
 
@@ -8,5 +9,7 @@ import osk.sko.FitnessApp.user.model.User;
 public interface UserMapper {
 
     UserDTO userToUserDTO(User user);
+
+    @Mapping(target = "password", ignore = true)
     User userDTOToUser(UserDTO userDTO);
 }

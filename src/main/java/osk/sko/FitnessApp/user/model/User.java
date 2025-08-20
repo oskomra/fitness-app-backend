@@ -3,7 +3,8 @@ package osk.sko.FitnessApp.user.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -16,15 +17,15 @@ public class User {
     private String email;
     private String name;
     private String lastName;
-    private String phone;
+    private String phoneNumber;
     private String password;
     private String authority;
 
-    public User(String email, String name, String lastName, String phone, String password, String authority) {
+    public User(String email, String name, String lastName, String phoneNumber, String password, String authority) {
         this.email = email;
         this.name = name;
         this.lastName = lastName;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.password = password;
         this.authority = authority;
     }

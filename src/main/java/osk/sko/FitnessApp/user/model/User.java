@@ -2,6 +2,10 @@ package osk.sko.FitnessApp.user.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import osk.sko.FitnessApp.workout.model.Workout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +24,9 @@ public class User {
     private String phoneNumber;
     private String password;
     private String authority;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Workout> workouts = new ArrayList<>();
 
     public User(String email, String name, String lastName, String phoneNumber, String password, String authority) {
         this.email = email;

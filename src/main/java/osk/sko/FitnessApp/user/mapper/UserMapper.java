@@ -8,8 +8,9 @@ import osk.sko.FitnessApp.user.model.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserDTO userToUserDTO(User user);
+
+    UserDTO toDTO(User user);
 
     @Mapping(target = "password", ignore = true)
-    User userDTOToUser(UserDTO userDTO);
+    User toEntity(UserDTO userDTO);
 }

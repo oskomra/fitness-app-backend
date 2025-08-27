@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import osk.sko.FitnessApp.workout.dto.WorkoutDTO;
+import osk.sko.FitnessApp.workout.model.WorkoutExerciseSet;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +33,6 @@ public class UserDTO {
     private String phoneNumber;
 
     private String authority;
+
+    private List<WorkoutDTO> workouts;
 }

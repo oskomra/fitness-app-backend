@@ -75,7 +75,7 @@ public class UserService {
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 
-            UserDTO userDTO = userMapper.userToUserDTO(user);
+            UserDTO userDTO = userMapper.toDTO(user);
 
             return new AuthResponse(token, userDTO);
 

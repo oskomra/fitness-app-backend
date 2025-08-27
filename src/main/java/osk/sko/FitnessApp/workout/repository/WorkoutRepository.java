@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 import osk.sko.FitnessApp.workout.model.Workout;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface WorkoutRepository extends JpaRepository<Workout, Integer> {
-    List<Workout> findByUserId(long userId);
+public interface WorkoutRepository extends JpaRepository<Workout, Long> {
+    List<Workout> findAllByUserId(Long userId);
+    Optional<Workout> findByUserIdAndEndDateIsNull(Long userId);
 }

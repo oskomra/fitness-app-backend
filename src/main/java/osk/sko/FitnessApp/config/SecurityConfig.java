@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/exercises/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/equipments/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/muscles/**").permitAll()
+                        .requestMatchers("/workouts/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .cors(Customizer.withDefaults())
                 .logout(logout -> logout

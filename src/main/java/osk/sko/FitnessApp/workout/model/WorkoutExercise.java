@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import osk.sko.FitnessApp.exercise.model.Exercise;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -15,9 +18,8 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int sets;
-    private int reps;
-    private double weight;
+    @OneToMany(mappedBy = "workoutExercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WorkoutExerciseSet> sets = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "workout_id", nullable = false)

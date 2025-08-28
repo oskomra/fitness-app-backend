@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import osk.sko.FitnessApp.workout.dto.WorkoutExerciseDTO;
 import osk.sko.FitnessApp.workout.service.WorkoutExerciseService;
 
@@ -20,5 +21,11 @@ public class WorkoutExerciseController {
     @PostMapping("/{exerciseId}")
     public ResponseEntity<WorkoutExerciseDTO> addExerciseToActiveWorkout(@PathVariable String exerciseId) {
         return ResponseEntity.ok(workoutExerciseService.addExerciseToActiveWorkout(exerciseId));
+    }
+
+    @DeleteMapping("/{workoutExerciseId}")
+    public ResponseEntity<Void> removeExerciseFromActiveWorkout(@PathVariable long workoutExerciseId) {
+        workoutExerciseService.removeExerciseFromActiveWorkout(workoutExerciseId);
+        return ResponseEntity.noContent().build();
     }
 }

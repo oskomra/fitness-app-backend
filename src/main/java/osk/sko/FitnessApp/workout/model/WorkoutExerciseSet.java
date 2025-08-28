@@ -21,4 +21,17 @@ public class WorkoutExerciseSet {
     @ManyToOne
     @JoinColumn(name = "workout_exercise_id", nullable = false)
     private WorkoutExercise workoutExercise;
+
+    public WorkoutExerciseSet(int setNumber, int reps, double weight, WorkoutExercise workoutExercise) {
+        this.setNumber = setNumber;
+        this.reps = reps;
+        this.weight = weight;
+        this.workoutExercise = workoutExercise;
+    }
+
+    public WorkoutExerciseSet(int setNumber, WorkoutExercise workoutExercise) {
+        this.setNumber = setNumber;
+        this.workoutExercise = workoutExercise;
+    }
+
 }

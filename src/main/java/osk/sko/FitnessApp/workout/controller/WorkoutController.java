@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import osk.sko.FitnessApp.workout.dto.WorkoutDTO;
 import osk.sko.FitnessApp.workout.dto.WorkoutUpdateDTO;
-import osk.sko.FitnessApp.workout.model.Workout;
 import osk.sko.FitnessApp.workout.service.WorkoutService;
 
 import java.util.List;

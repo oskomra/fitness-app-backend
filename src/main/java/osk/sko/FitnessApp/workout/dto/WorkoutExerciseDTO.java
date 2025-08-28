@@ -12,5 +12,5 @@ public class WorkoutExerciseDTO {
     private Long id;
     private List<WorkoutExerciseSetDTO> sets;
     private Long workoutId;
-    private Long exerciseId;
+    private String exerciseId;
 }

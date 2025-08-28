@@ -13,7 +13,4 @@ public class Equipment {
     long id;
     String name;
 
-    public Equipment(String name) {
-        this.name = name;
-    }
 }

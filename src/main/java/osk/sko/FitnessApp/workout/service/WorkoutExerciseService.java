@@ -11,8 +11,12 @@ import osk.sko.FitnessApp.workout.dto.WorkoutExerciseDTO;
 import osk.sko.FitnessApp.workout.mapper.WorkoutExerciseMapper;
 import osk.sko.FitnessApp.workout.model.Workout;
 import osk.sko.FitnessApp.workout.model.WorkoutExercise;
+import osk.sko.FitnessApp.workout.model.WorkoutExerciseSet;
 import osk.sko.FitnessApp.workout.repository.WorkoutExerciseRepository;
 import osk.sko.FitnessApp.workout.repository.WorkoutRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,11 +38,30 @@ public class WorkoutExerciseService {
 
         WorkoutExercise workoutExercise = new WorkoutExercise();
         workoutExercise.setExercise(exercise);
-        workoutExercise.setWorkout(workout);
+
+        List<WorkoutExerciseSet> sets = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            sets.add(new WorkoutExerciseSet(i, 0, 0, workoutExercise));
+        }
+        workoutExercise.setSets(sets);
+
+        workout.addExercise(workoutExercise);
 
         workoutExerciseRepository.save(workoutExercise);
         return workoutExerciseMapper.toDTO(workoutExercise);
 
+    }
+
+    public void removeExerciseFromActiveWorkout(long workoutExerciseId) {
+        User currentUser = userDetailsService.getCurrentUser();
+        Workout workout = workoutRepository.findByUserIdAndEndDateIsNull(currentUser.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("No active workout found for this user"));
+
+        WorkoutExercise workoutExercise = workoutExerciseRepository.findById(workoutExerciseId)
+                .orElseThrow(() -> new ResourceNotFoundException("Exercise not found in active workout"));
+
+        workout.removeExercise(workoutExercise);
+        workoutExerciseRepository.delete(workoutExercise);
     }
 
 }

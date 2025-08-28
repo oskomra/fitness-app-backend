@@ -2,6 +2,7 @@ package osk.sko.FitnessApp.workout.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import osk.sko.FitnessApp.user.model.User;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"exercises"})
 @Entity
 @Table(name = "workouts")
 public class Workout {
@@ -30,4 +32,14 @@ public class Workout {
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<WorkoutExercise> exercises = new HashSet<>();
+
+    public void addExercise(WorkoutExercise workoutExercise) {
+        exercises.add(workoutExercise);
+        workoutExercise.setWorkout(this);
+    }
+
+    public void removeExercise(WorkoutExercise workoutExercise) {
+        exercises.remove(workoutExercise);
+        workoutExercise.setWorkout(null);
+    }
 }

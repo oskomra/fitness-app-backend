@@ -1,6 +1,8 @@
 package osk.sko.FitnessApp.exercise.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "exercises")
 public class Exercise {
@@ -28,6 +32,7 @@ public class Exercise {
             joinColumns = @JoinColumn(name = "exercise_id"),
             inverseJoinColumns = @JoinColumn(name = "body_part_id")
     )
+    @Builder.Default
     private Set<BodyPart> bodyParts = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -36,6 +41,7 @@ public class Exercise {
             joinColumns = @JoinColumn(name = "exercise_id"),
             inverseJoinColumns = @JoinColumn(name = "equipment_id")
     )
+    @Builder.Default
     private Set<Equipment> equipments = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -44,6 +50,7 @@ public class Exercise {
             joinColumns = @JoinColumn(name = "exercise_id"),
             inverseJoinColumns = @JoinColumn(name = "muscle_id")
     )
+    @Builder.Default
     private Set<Muscle> targetMuscles = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -52,6 +59,7 @@ public class Exercise {
             joinColumns = @JoinColumn(name = "exercise_id"),
             inverseJoinColumns = @JoinColumn(name = "muscle_id")
     )
+    @Builder.Default
     private Set<Muscle> secondaryMuscles = new HashSet<>();
 
 }

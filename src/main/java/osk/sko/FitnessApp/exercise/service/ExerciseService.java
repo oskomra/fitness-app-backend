@@ -2,6 +2,7 @@ package osk.sko.FitnessApp.exercise.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import osk.sko.FitnessApp.exception.ResourceNotFoundException;
 import osk.sko.FitnessApp.exercise.dto.ExerciseSummaryDTO;
 import osk.sko.FitnessApp.exercise.model.Exercise;
 import osk.sko.FitnessApp.exercise.repository.ExerciseRepository;
@@ -16,7 +17,7 @@ public class ExerciseService {
 
     public Exercise getExerciseById(String exerciseId) {
         return exerciseRepository.findById(exerciseId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Exercise not found"));
     }
 
     public List<ExerciseSummaryDTO> getAllExercises() {

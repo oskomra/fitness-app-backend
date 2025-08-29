@@ -15,7 +15,9 @@ public class WorkoutExerciseSetController {
     private final WorkoutExerciseSetService workoutExerciseSetService;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<WorkoutExerciseSetDTO> updateExerciseSet(@PathVariable long id, @RequestBody WorkoutExerciseSetUpdateDTO workoutExerciseSetUpdateDTO) {
+    public ResponseEntity<WorkoutExerciseSetDTO> updateExerciseSet(
+            @PathVariable long id,
+            @RequestBody WorkoutExerciseSetUpdateDTO workoutExerciseSetUpdateDTO) {
         return ResponseEntity.ok(workoutExerciseSetService.updateExerciseSet(id, workoutExerciseSetUpdateDTO));
     }
 

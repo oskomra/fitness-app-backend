@@ -1,9 +1,7 @@
 package osk.sko.FitnessApp.workout.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import osk.sko.FitnessApp.exercise.model.Exercise;
 
 import java.util.ArrayList;
@@ -11,6 +9,8 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(exclude = {"sets"})
 @Entity
 @Table(name = "workout_exercises")
@@ -20,6 +20,7 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Builder.Default
     @OneToMany(mappedBy = "workoutExercise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkoutExerciseSet> sets = new ArrayList<>();
 

@@ -12,6 +12,7 @@ import osk.sko.FitnessApp.workout.mapper.WorkoutMapper;
 import osk.sko.FitnessApp.workout.model.Workout;
 import osk.sko.FitnessApp.workout.repository.WorkoutRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -54,7 +55,7 @@ public class WorkoutService {
 
         Workout workout = new Workout();
         workout.setUser(currentUser);
-        workout.setStartDate(java.time.LocalDateTime.now());
+        workout.setStartDate(LocalDateTime.now());
 
         workoutRepository.save(workout);
         return workoutMapper.toDTO(workout);
@@ -65,7 +66,7 @@ public class WorkoutService {
         Workout workout = workoutRepository.findByUserIdAndEndDateIsNull(currentUser.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No active workout found for this user"));
 
-        workout.setEndDate(java.time.LocalDateTime.now());
+        workout.setEndDate(LocalDateTime.now());
         workoutRepository.save(workout);
         return workoutMapper.toDTO(workout);
     }

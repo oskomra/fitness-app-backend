@@ -43,7 +43,7 @@ class ExerciseServiceTest {
 
     @DisplayName("getExerciseById Tests")
     @Nested
-    class getExerciseByIdTests {
+    class GetExerciseByIdTests {
 
         @Test
         @DisplayName("Should return exercise when ID exists")
@@ -76,8 +76,8 @@ class ExerciseServiceTest {
             //When
             final ResourceNotFoundException exception = assertThrows(
                     ResourceNotFoundException.class,
-                    () -> {exerciseService.getExerciseById(exerciseId);
-            });
+                    () -> exerciseService.getExerciseById(exerciseId)
+            );
 
             //Then
             assertEquals("Exercise not found", exception.getMessage());
@@ -87,7 +87,7 @@ class ExerciseServiceTest {
 
     @DisplayName("getAllExercises Tests")
     @Nested
-    class getAllExercisesTests {
+    class GetAllExercisesTests {
 
         @Test
         @DisplayName("Should return list of exercises")

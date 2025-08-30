@@ -1,11 +1,13 @@
 package osk.sko.FitnessApp.workout.dto;
 
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class WorkoutUpdateDTO {
 
     @Size(max = 100, message = "Title must be at most 100 characters long")

@@ -7,8 +7,8 @@ import osk.sko.FitnessApp.workout.model.Workout;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,6 +25,7 @@ public class User {
     private String password;
     private String authority;
 
+    @Builder.Default
     @OneToMany(cascade = CascadeType.ALL)
     private List<Workout> workouts = new ArrayList<>();
 

@@ -35,7 +35,7 @@ public class UserService {
     @Value("${server.servlet.session.cookie.same-site}")
     private String sameSite;
 
-    public void register(RegisterRequest registerRequest) {
+    public UserDTO register(RegisterRequest registerRequest) {
         if(userRepository.findUserByEmail(registerRequest.getEmail()).isEmpty()) {
             User user = new User(
                     registerRequest.getEmail(),
@@ -46,6 +46,7 @@ public class UserService {
                     "ROLE_USER"
             );
             userRepository.save(user);
+            return userMapper.toDTO(user);
         } else {
             throw new UserAlreadyExistsException("User with that email already exists");
         }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import osk.sko.FitnessApp.user.dto.AuthRequest;
 import osk.sko.FitnessApp.user.dto.AuthResponse;
 import osk.sko.FitnessApp.user.dto.RegisterRequest;
+import osk.sko.FitnessApp.user.dto.UserDTO;
 import osk.sko.FitnessApp.user.service.UserService;
 
 @RestController
@@ -19,9 +20,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    ResponseEntity<Void> register(@Valid @RequestBody RegisterRequest registerRequest) {
-        userService.register(registerRequest);
-        return ResponseEntity.ok().build();
+    ResponseEntity<UserDTO> register(@Valid @RequestBody RegisterRequest registerRequest) {
+        return ResponseEntity.ok(userService.register(registerRequest));
     }
 
     @PostMapping("/login")
